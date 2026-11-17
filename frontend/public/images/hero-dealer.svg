@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f1f38"/>
+      <stop offset="1" stop-color="#174a8b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="700" fill="url(#bg)"/>
+  <circle cx="200" cy="140" r="90" fill="#f47b20" opacity="0.22"/>
+  <rect x="160" y="200" width="640" height="240" rx="8" fill="#0b2140"/>
+  <path d="M160 200 L480 90 L800 200 Z" fill="#0f1f38"/>
+  <rect x="180" y="220" width="160" height="200" fill="#f47b20" opacity="0.35"/>
+  <rect x="380" y="220" width="120" height="200" fill="#ffffff" opacity="0.12"/>
+  <rect x="540" y="220" width="120" height="200" fill="#ffffff" opacity="0.12"/>
+  <text x="800" y="200" font-family="Arial" font-size="40" fill="#ffffff" opacity="0.5" font-weight="bold">DEALERSHIP</text>
+  <rect y="470" width="1600" height="230" fill="#0b2140" opacity="0.85"/>
+  <g transform="translate(760,80)">
+    <rect x="0" y="300" width="480" height="86" rx="40" fill="#ffffff" opacity="0.15"/>
+    <path d="M130 302 L190 250 Q202 240 220 240 L330 240 Q356 240 372 256 L420 302 Z" fill="#0f1f38"/>
+    <circle cx="100" cy="392" r="48" fill="#0b2140"/><circle cx="100" cy="392" r="22" fill="#f47b20"/>
+    <circle cx="380" cy="392" r="48" fill="#0b2140"/><circle cx="380" cy="392" r="22" fill="#f47b20"/>
+  </g>
+</svg>

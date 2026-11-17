@@ -1,0 +1,24 @@
+import { chromium } from "playwright";
+const BASE = "http://127.0.0.1:5173";
+const browser = await chromium.launch({ channel: "chrome", headless: true });
+const page = await (await browser.newContext()).newPage();
+const errs = [];
+page.on("response", (r) => { if (r.status() >= 400) errs.push(`${r.status()} ${r.request().method()} ${r.url()}`); });
+await page.goto(BASE + "/login", { waitUntil: "networkidle" });
+await page.getByRole("textbox", { name: /^Email address/ }).fill("ltx.insurer@example.com");
+await page.getByRole("textbox", { name: /^Password/ }).fill("LtxInsurer@12345");
+await page.getByRole("button", { name: "Sign in", exact: true }).click();
+await page.waitForURL(/\/provider/);
+await page.goto(BASE + "/claims/bdcefb30-39df-4157-b85a-e9cb2165d355", { waitUntil: "networkidle" });
+await page.waitForTimeout(1000);
+const sr = page.getByRole("button", { name: "Start review" });
+console.log("Start review count:", await sr.count());
+try {
+  await sr.click();
+  console.log("clicked Start review");
+} catch (e) { console.log("Start review click FAILED:", e.message.split("\n")[0]); }
+await page.waitForTimeout(1000);
+const btns = await page.getByRole("button").allTextContents();
+console.log("BUTTONS after review:", JSON.stringify(btns));
+console.log("ERRORS:", errs.length ? errs.join(" | ") : "(none)");
+await browser.close();

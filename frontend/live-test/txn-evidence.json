@@ -1,0 +1,97 @@
+{
+  "ts": 1794908219083,
+  "custEmail": "ltx.customer.1794908219083@example.com",
+  "insEmail": "ltx.insurer@example.com",
+  "appId": "094741ff-06cb-4429-b210-f3716ff1ff44",
+  "policyId": "cd0c346e-6587-49c0-97da-c6b93645f806",
+  "payRef": "PAY-261117-252E046199",
+  "claimId": "48a311e3-aa97-4948-9a7d-8cdd1ffb39ec",
+  "results": [
+    {
+      "status": "PASS",
+      "label": "T1 register customer",
+      "extra": "ltx.customer.1794908219083@example.com"
+    },
+    {
+      "status": "PASS",
+      "label": "T1 add vehicle",
+      "extra": "LTX 19083A"
+    },
+    {
+      "status": "PASS",
+      "label": "T1 request quotation",
+      "extra": "http://127.0.0.1:5173/app/quotes/9279eea2-0046-4f14-87b5-afed29ab42c4"
+    },
+    {
+      "status": "PASS",
+      "label": "T1 select offer -> application",
+      "extra": "094741ff-06cb-4429-b210-f3716ff1ff44"
+    },
+    {
+      "status": "PASS",
+      "label": "T1 submit application",
+      "extra": "094741ff-06cb-4429-b210-f3716ff1ff44"
+    },
+    {
+      "status": "PASS",
+      "label": "T1 insurer approve application",
+      "extra": "094741ff-06cb-4429-b210-f3716ff1ff44"
+    },
+    {
+      "status": "PASS",
+      "label": "T1 customer initiate bank payment",
+      "extra": "094741ff-06cb-4429-b210-f3716ff1ff44"
+    },
+    {
+      "status": "PASS",
+      "label": "T1 payment reference",
+      "extra": "PAY-261117-252E046199"
+    },
+    {
+      "status": "PASS",
+      "label": "T1 insurer verify payment",
+      "extra": "PAY-261117-252E046199"
+    },
+    {
+      "status": "PASS",
+      "label": "T1 insurer issue policy",
+      "extra": "cd0c346e-6587-49c0-97da-c6b93645f806"
+    },
+    {
+      "status": "PASS",
+      "label": "T1 certificate download",
+      "extra": "POL-SAV-CO-261117-32C6B097.pdf policy-number-present"
+    },
+    {
+      "status": "PASS",
+      "label": "T3 customer submit claim",
+      "extra": "48a311e3-aa97-4948-9a7d-8cdd1ffb39ec"
+    },
+    {
+      "status": "PASS",
+      "label": "T3 customer upload evidence",
+      "extra": "48a311e3-aa97-4948-9a7d-8cdd1ffb39ec"
+    },
+    {
+      "status": "PASS",
+      "label": "T3 insurer request information",
+      "extra": "48a311e3-aa97-4948-9a7d-8cdd1ffb39ec"
+    },
+    {
+      "status": "PASS",
+      "label": "T3 customer respond to insurer",
+      "extra": "48a311e3-aa97-4948-9a7d-8cdd1ffb39ec"
+    },
+    {
+      "status": "PASS",
+      "label": "T3 insurer approve claim",
+      "extra": "48a311e3-aa97-4948-9a7d-8cdd1ffb39ec"
+    },
+    {
+      "status": "PASS",
+      "label": "T5 customer cannot issue policy",
+      "extra": "HTTP 403"
+    }
+  ],
+  "consoleErrs": []
+}

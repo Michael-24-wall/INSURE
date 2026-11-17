@@ -1,0 +1,151 @@
+{
+  "results": [
+    {
+      "status": "PASS",
+      "label": "landing",
+      "extra": "title=INSURECONNECT — All Insurance. One Connected Ecosystem."
+    },
+    {
+      "status": "PASS",
+      "label": "register customer",
+      "extra": "live.customer.1794903554632@example.com"
+    },
+    {
+      "status": "PASS",
+      "label": "login customer",
+      "extra": "http://127.0.0.1:5173/app"
+    },
+    {
+      "status": "PASS",
+      "label": "login provider_admin",
+      "extra": "http://127.0.0.1:5173/provider"
+    },
+    {
+      "status": "PASS",
+      "label": "login provider_staff",
+      "extra": "http://127.0.0.1:5173/provider"
+    },
+    {
+      "status": "PASS",
+      "label": "login claims_officer",
+      "extra": "http://127.0.0.1:5173/claims"
+    },
+    {
+      "status": "PASS",
+      "label": "login inspector",
+      "extra": "http://127.0.0.1:5173/inspector"
+    },
+    {
+      "status": "PASS",
+      "label": "login agent",
+      "extra": "http://127.0.0.1:5173/agent"
+    },
+    {
+      "status": "PASS",
+      "label": "login admin",
+      "extra": "http://127.0.0.1:5173/admin"
+    },
+    {
+      "status": "PASS",
+      "label": "marketplace categories",
+      "extra": "live=true expanding=true"
+    },
+    {
+      "status": "PASS",
+      "label": "customer vehicles",
+      "extra": "/app/vehicles"
+    },
+    {
+      "status": "PASS",
+      "label": "customer policies",
+      "extra": "/app/policies"
+    },
+    {
+      "status": "PASS",
+      "label": "customer claims",
+      "extra": "/app/claims"
+    },
+    {
+      "status": "PASS",
+      "label": "customer payments",
+      "extra": "/app/payments"
+    },
+    {
+      "status": "PASS",
+      "label": "customer profile",
+      "extra": "/profile"
+    },
+    {
+      "status": "PASS",
+      "label": "customer notifications",
+      "extra": "/notifications"
+    },
+    {
+      "status": "PASS",
+      "label": "provider products",
+      "extra": "/provider/products"
+    },
+    {
+      "status": "PASS",
+      "label": "provider quotes",
+      "extra": "/provider/quotes"
+    },
+    {
+      "status": "PASS",
+      "label": "provider applications",
+      "extra": "/provider/applications"
+    },
+    {
+      "status": "PASS",
+      "label": "provider policies",
+      "extra": "/provider/policies"
+    },
+    {
+      "status": "PASS",
+      "label": "provider payments",
+      "extra": "/provider/payments"
+    },
+    {
+      "status": "PASS",
+      "label": "provider network",
+      "extra": "/provider/network"
+    },
+    {
+      "status": "PASS",
+      "label": "provider settings",
+      "extra": "/provider/settings"
+    },
+    {
+      "status": "FAIL",
+      "label": "admin dashboard pages",
+      "extra": "page.waitForURL: Timeout 15000ms exceeded."
+    },
+    {
+      "status": "PASS",
+      "label": "unauth /app redirect",
+      "extra": "http://127.0.0.1:5173/login"
+    },
+    {
+      "status": "PASS",
+      "label": "customer blocked from /admin",
+      "extra": "http://127.0.0.1:5173/app"
+    },
+    {
+      "status": "FAIL",
+      "label": "ui logout",
+      "extra": "locator.click: Timeout 30000ms exceeded."
+    },
+    {
+      "status": "PASS",
+      "label": "responsive viewports",
+      "extra": "390x844 / 820x1180 / 1440x900"
+    }
+  ],
+  "consoleErrors": [
+    "Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+  ],
+  "pageErrors": [],
+  "badResponses": [
+    "429 POST http://127.0.0.1:5173/api/v1/auth/login/"
+  ]
+}

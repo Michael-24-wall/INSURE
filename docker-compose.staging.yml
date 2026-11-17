@@ -1,0 +1,124 @@
+# INSURECONNECT — Staging-only compose.
+# Uses a separate project/volumes/database so it cannot touch the development
+# (or any production) data. TLS is terminated by an upstream reverse proxy;
+# the nginx SPA is exposed internally and `SECURE_SSL_REDIRECT=True` is set in
+# the staging env. Provide secrets via environment variables, never hardcode.
+#
+#   STAGING_SECRET_KEY=... STAGING_DB_PASSWORD=... \
+#     docker compose -p autoinsure-staging -f docker-compose.staging.yml up --build
+#
+# Seed only synthetic/test data; do NOT load production customer data.
+
+name: autoinsure-staging
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: autoinsure_staging
+      POSTGRES_USER: staging_app
+      POSTGRES_PASSWORD: ${STAGING_DB_PASSWORD:?set STAGING_DB_PASSWORD}
+    volumes:
+      - staging_postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U staging_app"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  redis:
+    image: redis:7-alpine
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  web:
+    build:
+      context: ./backend
+    command: gunicorn config.wsgi:application --bind 0.0.0.0:8000 --workers 3 --timeout 120
+    env_file: ./backend/.env
+    environment:
+      DJANGO_DEBUG: "False"
+      DJANGO_ALLOWED_HOSTS: "staging.autoinssure.example"
+      DJANGO_SECRET_KEY: ${STAGING_SECRET_KEY:?set STAGING_SECRET_KEY}
+      DATABASE_URL: postgresql://staging_app:${STAGING_DB_PASSWORD}@db:5432/autoinssure_staging
+      REDIS_URL: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+      CELERY_TASK_ALWAYS_EAGER: "False"
+      CACHE_URL: redis://redis:6379/1
+      KYC_REQUIRED_FOR_POLICY_ISSUANCE: "True"
+      SECURE_SSL_REDIRECT: "True"
+      SESSION_COOKIE_SECURE: "True"
+      CSRF_COOKIE_SECURE: "True"
+    volumes:
+      - staging_media_data:/app/media
+      - staging_static_data:/app/staticfiles
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    expose:
+      - "8000"
+
+  worker:
+    build:
+      context: ./backend
+    command: celery -A config worker -l info
+    env_file: ./backend/.env
+    environment:
+      DJANGO_DEBUG: "False"
+      DJANGO_ALLOWED_HOSTS: "staging.autoinssure.example"
+      DJANGO_SECRET_KEY: ${STAGING_SECRET_KEY:?set STAGING_SECRET_KEY}
+      DATABASE_URL: postgresql://staging_app:${STAGING_DB_PASSWORD}@db:5432/autoinssure_staging
+      REDIS_URL: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+      CELERY_TASK_ALWAYS_EAGER: "False"
+      SKIP_MIGRATE: "1"
+      SKIP_COLLECTSTATIC: "1"
+    volumes:
+      - staging_media_data:/app/media
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  beat:
+    build:
+      context: ./backend
+    command: celery -A config beat -l info
+    env_file: ./backend/.env
+    environment:
+      DJANGO_DEBUG: "False"
+      DJANGO_ALLOWED_HOSTS: "staging.autoinssure.example"
+      DJANGO_SECRET_KEY: ${STAGING_SECRET_KEY:?set STAGING_SECRET_KEY}
+      DATABASE_URL: postgresql://staging_app:${STAGING_DB_PASSWORD}@db:5432/autoinssure_staging
+      REDIS_URL: redis://redis:6379/0
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+      CELERY_TASK_ALWAYS_EAGER: "False"
+      SKIP_MIGRATE: "1"
+      SKIP_COLLECTSTATIC: "1"
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - web
+
+volumes:
+  staging_postgres_data:
+  staging_media_data:
+  staging_static_data:

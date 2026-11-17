@@ -1,0 +1,32 @@
+[
+  {
+    "status": "PASS",
+    "label": "N1 customer read other customer policy",
+    "extra": "HTTP 404"
+  },
+  {
+    "status": "PASS",
+    "label": "N2 claim against unrelated policy",
+    "extra": "HTTP 400"
+  },
+  {
+    "status": "PASS",
+    "label": "N3 insurer sees only own insurer applications",
+    "extra": "HTTP 200"
+  },
+  {
+    "status": "NOT TESTED",
+    "label": "N4 issue before approval/payment",
+    "extra": "no submitted application available"
+  },
+  {
+    "status": "PASS",
+    "label": "N5 customer cannot approve claim",
+    "extra": "HTTP 403"
+  },
+  {
+    "status": "PASS",
+    "label": "N6 non-existent ID -> 404",
+    "extra": "HTTP 404"
+  }
+]
