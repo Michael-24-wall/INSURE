@@ -27,6 +27,10 @@ frontend/.vite/
 .env
 .env.*
 !.env.example
+backend/.test-accounts.json
+backend/.test-accounts.e2e.json
+INSURECONNECT_TEST_CREDENTIALS.md
+INSURECONNECT_TEST_CREDENTIALS_E2E.md
 
 # OS / editor
 .DS_Store

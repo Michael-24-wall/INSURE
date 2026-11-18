@@ -17,6 +17,7 @@ from apps.insurance.models import (
 )
 from apps.insurance.services import generate_quotes, select_quotation
 from apps.organizations.models import Membership, Organization
+from apps.common.test_accounts import TEST_ACCOUNT_EMAILS, TEST_ACCOUNT_ORG_NAMES
 from apps.vehicles.models import Vehicle
 
 E2E_EMAILS = [
@@ -25,8 +26,9 @@ E2E_EMAILS = [
     "e2e.customer2@example.com",
     "e2e.provider@example.com",
     "e2e.dealer@example.com",
+    *TEST_ACCOUNT_EMAILS,
 ]
-E2E_ORGS = ["E2E Alpha Insurance", "E2E Metro Motors"]
+E2E_ORGS = ["E2E Alpha Insurance", "E2E Metro Motors", *TEST_ACCOUNT_ORG_NAMES]
 
 
 class Command(BaseCommand):

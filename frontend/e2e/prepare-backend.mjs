@@ -53,3 +53,4 @@ if (existingBackend) {
 
 run(["manage.py", "migrate", "--noinput"], "migrate");
 run(["manage.py", "seed_e2e"], "seed_e2e");
+run(["manage.py", "seed_test_accounts"], "seed_test_accounts");
